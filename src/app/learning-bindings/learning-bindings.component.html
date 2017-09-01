@@ -1,0 +1,24 @@
+<h3>Estudando Bindings</h3>
+
+<button on-click="onClick()">Evento on-click</button>
+<button (click)="onClick()">Evento onClick</button>
+
+<br />
+<br />
+
+<button on-mouseover="onMouseOver()">Evento on-mouseover</button>
+<button (mouseover)="onMouseOver()">Evento on-click</button>
+
+<br />
+<br />
+
+<input type="text" placeholder="Evemto KeyDown" (keydown)="onKeyDown()">
+
+<input type="text" placeholder="Evemto KeyDown" on-keydown="onKeyDown()">
+
+<br />
+<br />
+
+<input type="text" placeholder="Evemto KeyUp" (keyup)="onKeyUp()">
+
+<input type="text" placeholder="Evemto KeyUp" on-keyup="onKeyUp()">
