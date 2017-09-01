@@ -14,7 +14,7 @@
 <strong>Valor da Variavel 'userName':</strong> {{ userName }}
 
 <br />
-<input type="text" placeholder="Evemto KeyDown" on-keydown="onKeyDown($event)" value="{{ userName }}">
+<input type="text" placeholder="Evemto KeyDown" [(ngModel)]="userName">
 <strong>Valor da Variavel 'userName':</strong> {{ userName }}
 
 <br />
@@ -23,7 +23,7 @@
 <strong>Valor da Variavel 'userEmail':</strong> {{ userEmail }}
 
 <br />
-<input type="text" placeholder="Evemto KeyUp" on-keyup="onKeyUp($event)" value="{{ userEmail }}">
+<input type="text" placeholder="Evemto KeyUp" [ngModel]="userEmail" (ngModelChange)="userEmail = $event">
 <strong [class.bg_red]="mouseClickCount > 3">Valor da Variavel 'userEmail':</strong> {{ userEmail }}
 
 <style>
