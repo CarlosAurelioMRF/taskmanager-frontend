@@ -1,24 +1,33 @@
 <h3>Estudando Bindings</h3>
 
-<button on-click="onClick()">Evento on-click</button>
-<button (click)="onClick()">Evento onClick</button>
+<button on-click="onClick()">Evento on-click {{ mouseClickCount }}</button>
+<button (click)="onClick()">Evento onClick {{ mouseClickCount }}</button>
 
 <br />
 <br />
 
-<button on-mouseover="onMouseOver()">Evento on-mouseover</button>
-<button (mouseover)="onMouseOver()">Evento on-click</button>
+<button on-mouseover="onMouseOver()">Evento on-mouseover {{ mouseOverCount }}</button>
+<button (mouseover)="onMouseOver()">Evento on-click {{ mouseOverCount }} </button>
+
+<br />
+<input type="text" placeholder="Evemto KeyDown" (keydown)="onKeyDown($event)" [value]="userName">
+<strong>Valor da Variavel 'userName':</strong> {{ userName }}
+
+<br />
+<input type="text" placeholder="Evemto KeyDown" on-keydown="onKeyDown($event)" value="{{ userName }}">
+<strong>Valor da Variavel 'userName':</strong> {{ userName }}
 
 <br />
 <br />
-
-<input type="text" placeholder="Evemto KeyDown" (keydown)="onKeyDown()">
-
-<input type="text" placeholder="Evemto KeyDown" on-keydown="onKeyDown()">
+<input type="text" placeholder="Evemto KeyUp" (keyup)="onKeyUp($event)" [value]="userEmail">
+<strong>Valor da Variavel 'userEmail':</strong> {{ userEmail }}
 
 <br />
-<br />
+<input type="text" placeholder="Evemto KeyUp" on-keyup="onKeyUp($event)" value="{{ userEmail }}">
+<strong [class.bg_red]="mouseClickCount > 3">Valor da Variavel 'userEmail':</strong> {{ userEmail }}
 
-<input type="text" placeholder="Evemto KeyUp" (keyup)="onKeyUp()">
-
-<input type="text" placeholder="Evemto KeyUp" on-keyup="onKeyUp()">
+<style>
+    .bg_red {
+        background-color: red;
+    }
+</style>
