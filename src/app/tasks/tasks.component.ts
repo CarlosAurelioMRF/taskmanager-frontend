@@ -18,7 +18,10 @@ export class TasksComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.tasks = this.taskService.getTasks();
+        // Realizando o processamento assync
+        this.taskService.getTasks()
+            .then((tasks) => this.tasks = tasks)
+            .catch((error_msg) => console.log(error_msg));
     }
 
     public onSelect(task: Task): void {
@@ -26,3 +29,14 @@ export class TasksComponent implements OnInit {
     }
 
 }
+
+// arrow function: "=>"
+//function() {
+//    alert("Learn");
+//}
+
+//() => {
+//
+//}
+
+//() => alert("Learn");
