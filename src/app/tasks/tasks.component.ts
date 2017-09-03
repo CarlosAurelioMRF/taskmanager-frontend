@@ -19,7 +19,7 @@ export class TasksComponent implements OnInit {
 
     public ngOnInit() {
         // Realizando o processamento assync
-        this.taskService.getTasks()
+        this.taskService.getAll()
             .subscribe(tasks => this.tasks = tasks,
                        error => alert("Ocorreu um erro no servidor, tente mais tarde."));
     }
@@ -30,7 +30,7 @@ export class TasksComponent implements OnInit {
         if(!this.newTask.title) {
             alert("A tarefa deve ter um titulo.");
         } else {
-            this.taskService.createTask(this.newTask)
+            this.taskService.create(this.newTask)
                 .subscribe(task => {
                             this.tasks.push(task)
                             this.newTask = new Task(null, '');
@@ -41,7 +41,7 @@ export class TasksComponent implements OnInit {
 
     public deleteTask(task: Task){
         if(confirm(`Deseja realmente excluir a tarefa "${task.title}"`)) {
-            this.taskService.deleteTask(task.id).
+            this.taskService.delete(task.id).
                 subscribe(() => this.tasks = this.tasks.filter(t => t !== task),
                           () => alert("Ocorreu um erro no servidor, tente mais tarde."));
         }
