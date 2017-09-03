@@ -40,7 +40,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
             .switchMap((params: Params) => 
                 this.taskService.getById(+params['id'])
             )
-            .subscribe(task => this.task = task,
+            .subscribe(task => this.setTask(task),
                        error => alert("Ocorreu um erro no servidor, tente mais tarde."));
     }
 
@@ -48,7 +48,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
         $("#deadline").datetimepicker({
             'sideBySide': true,
             'locale': 'pt-br'
-        }).on('dp.change', () => this.task.deadline = $("#deadline").val() as string);
+        }).on('dp.change', () => this.reactiveTaskForm.get("deadline").setValue($("#deadline").val()));
     }
 
     public goBack() {
@@ -63,6 +63,19 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
     public showFieldError(field): boolean {
         return field.invalid && (field.dirty || field.touched);
+    }
+
+    private setTask(task: Task): void {
+        this.task = task;
+
+        let formModel = {
+            title: task.title || null,
+            description: task.description || null,
+            deadline: task.deadline || null,
+            done: task.done || null
+        };
+
+        this.reactiveTaskForm.setValue(formModel);
     }
 
 }
