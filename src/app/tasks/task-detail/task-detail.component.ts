@@ -47,13 +47,9 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     }
 
     public updateTask() {
-        if(!this.task.title) {
-            alert("A tarefa deve ter um titulo");
-        } else {
-            this.taskService.update(this.task)
-                .subscribe(() => alert("Tarefa atualizada com sucesso."),
-                           () => alert("Ocorreu um erro no servidor, tente mais tarde"));
-        }
+        this.taskService.update(this.task)
+            .subscribe(() => alert("Tarefa atualizada com sucesso."),
+                        () => alert("Ocorreu um erro no servidor, tente mais tarde"));
     }
 
     public showFieldError(field): boolean {
