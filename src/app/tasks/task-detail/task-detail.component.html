@@ -2,27 +2,31 @@
 
 <form #taskForm="ngForm" *ngIf="task">
   <div class="row">  
-    <div class="form-group col-md-6 has-feedback" [class.has-error]="title.invalid && title.touched" [class.has-success]="title.valid">
+    <div class="form-group col-md-6 has-feedback" [class.has-error]="showFieldError(title)" [class.has-success]="title.valid">
       <label for="title" class="control-label">Titulo</label>
-      <span class="glyphicon form-control-feeback" [class.glyphicon-remove]="title.invalid && title.touched" [class.glyphicon-ok]="title.valid" style="margin-right: 20px"></span>      
-      <input #title="ngModel" [(ngModel)]="task.title" type="text" class="form-control" name="title" id="title" required>
-      <div *ngIf="title.invalid && title.touched" class="text-danger">O titulo é obrigatório.</div>
+      <span class="glyphicon form-control-feeback" [class.glyphicon-remove]="showFieldError(title)" [class.glyphicon-ok]="title.valid" style="margin-right: 20px"></span>      
+      <input #title="ngModel" [(ngModel)]="task.title" type="text" class="form-control" name="title" id="title" required minlength="3">
+
+      <div *ngIf="showFieldError(title)" class="text-danger">
+        <div *ngIf="title.errors.required">O titulo é obrigatório.</div>
+        <div *ngIf="title.errors.minlength">O titulo deve ter no minimo 3 caracteres.</div>
+      </div>
     </div>
 
-    <div class="form-group col-md-3 has-feedback" [class.has-error]="deadline.invalid && deadline.touched" [class.has-success]="deadline.valid">
+    <div class="form-group col-md-3 has-feedback" [class.has-error]="showFieldError(deadline)" [class.has-success]="deadline.valid">
         <label for="deadline" class="control-label">Prazo de Entrega</label>
-        <span class="glyphicon form-control-feeback" [class.glyphicon-remove]="deadline.invalid && deadline.touched" [class.glyphicon-ok]="deadline.valid" style="margin-right: 20px"></span>      
-        <input #deadline="ngModel" [(ngModel)]="task.deadline" type="text" class="form-control" name="deadline" id="deadline" required>
-        <div *ngIf="deadline.invalid && deadline.touched" class="text-danger">O prazo de entrega é obrigatório.</div>
+        <span class="glyphicon form-control-feeback" [class.glyphicon-remove]="showFieldError(deadline)" [class.glyphicon-ok]="deadline.valid" style="margin-right: 20px"></span>      
+        <input #deadline="ngModel" [(ngModel)]="task.deadline" type="text" class="form-control" name="deadline" id="deadline">
+        <div *ngIf="showFieldError(deadline)" class="text-danger">O prazo de entrega é obrigatório.</div>
     </div>
 
-    <div class="form-group col-md-3 has-feedback" [class.has-error]="done.invalid && done.touched" [class.has-success]="done.valid">
+    <div class="form-group col-md-3 has-feedback" [class.has-error]="showFieldError(done)" [class.has-success]="done.valid">
       <label for="done" class="control-label">Situção</label>
-      <span class="glyphicon form-control-feeback" [class.glyphicon-remove]="done.invalid && done.touched" [class.glyphicon-ok]="done.valid" style="margin-right: 20px"></span>      
+      <span class="glyphicon form-control-feeback" [class.glyphicon-remove]="showFieldError(done)" [class.glyphicon-ok]="done.valid" style="margin-right: 20px"></span>      
       <select #done="ngModel" [(ngModel)]="task.done" type="text" class="form-control" name="done" id="done" required>
         <option *ngFor="let option of taskDoneOptions" [value]="option.value">{{ option.text }}</option>
       </select>
-      <div *ngIf="done.invalid && done.touched" class="text-danger">A situação é obrigatório.</div>
+      <div *ngIf="showFieldError(done)" class="text-danger">A situação é obrigatório.</div>
     </div>      
   </div>
 
